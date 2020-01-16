@@ -7,15 +7,17 @@
 
 import UIKit
 
-class HomeVC: UIViewController,EditNameDelegation {
+class HomeVC: UIViewController, EditNameDelegation {
     
+    weak var delegat: EditNameDelegation?
 
     @IBOutlet weak var nameLbl: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
 
-            let vc:EditProfileVC? =  EditProfileVC()
-    vc?.delegat = self
+        
+        let profileNavigationController = tabBarController?.viewControllers?.compactMap({ $0 as? UINavigationController }).first
+        (profileNavigationController?.topViewController as? ProfileVC)?.delegat = self
     }
     
 
